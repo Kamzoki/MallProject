@@ -58,7 +58,8 @@ public class FirstPersonAIO : MonoBehaviour {
     #region Variables
 
     #region Input Settings
-
+    public Joystick moverJS;
+    public Joystick RotatorJS;
     #endregion
 
     #region Look Settings
@@ -257,6 +258,8 @@ public class BETA_SETTINGS{
     {
         #region Look Settings - Start
 
+        RotatorJS = GameObject.FindGameObjectWithTag("RotateJS").GetComponent<FixedJoystick>();
+
         if(autoCrosshair || drawStaminaMeter){
             Canvas canvas = new GameObject("AutoCrosshair").AddComponent<Canvas>();
             canvas.gameObject.AddComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
@@ -295,6 +298,8 @@ public class BETA_SETTINGS{
         #endregion
 
         #region Movement Settings - Start  
+        moverJS = GameObject.FindGameObjectWithTag("MoveJS").GetComponent<FixedJoystick>();
+
         staminaInternal = staminaLevel;
         advanced.zeroFrictionMaterial = new PhysicMaterial("Zero_Friction");
         advanced.zeroFrictionMaterial.dynamicFriction =0;
@@ -328,9 +333,11 @@ public class BETA_SETTINGS{
             float mouseXInput;
             float mouseYInput;
             float camFOV = playerCamera.fieldOfView;
-            mouseXInput = Input.GetAxis("Mouse Y");
-            mouseYInput = Input.GetAxis("Mouse X");
-            if(targetAngles.y > 180) { targetAngles.y -= 360; followAngles.y -= 360; } else if(targetAngles.y < -180) { targetAngles.y += 360; followAngles.y += 360; }
+            //mouseXInput = Input.GetAxis("Mouse Y");
+            //mouseYInput = Input.GetAxis("Mouse X");
+            mouseXInput = RotatorJS.Vertical;
+            mouseYInput = RotatorJS.Horizontal;
+            if (targetAngles.y > 180) { targetAngles.y -= 360; followAngles.y -= 360; } else if(targetAngles.y < -180) { targetAngles.y += 360; followAngles.y += 360; }
             if(targetAngles.x > 180) { targetAngles.x -= 360; followAngles.x -= 360; } else if(targetAngles.x < -180) { targetAngles.x += 360; followAngles.x += 360; }
             targetAngles.y += mouseYInput * (mouseSensitivityInternal - ((baseCamFOV-camFOV)*fOVToMouseSensitivity)/6f);
             targetAngles.x += mouseXInput * (mouseSensitivityInternal - ((baseCamFOV-camFOV)*fOVToMouseSensitivity)/6f);
@@ -469,8 +476,11 @@ public class BETA_SETTINGS{
             }
 
 
-        float horizontalInput = Input.GetAxis("Horizontal");
-        float verticalInput = Input.GetAxis("Vertical");
+        //float horizontalInput = Input.GetAxis("Horizontal");
+        //float verticalInput = Input.GetAxis("Vertical");
+
+        float horizontalInput = moverJS.Horizontal;
+        float verticalInput = moverJS.Vertical;
         inputXY = new Vector2(horizontalInput, verticalInput);
         if(inputXY.magnitude > 1) { inputXY.Normalize(); }
        
