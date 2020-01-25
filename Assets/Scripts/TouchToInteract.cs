@@ -7,6 +7,7 @@ public class TouchToInteract : MonoBehaviour
     [SerializeField]
     private TouchPhase _touchPhase = TouchPhase.Began;
 
+    private Shop _previousOpenedShop;
     void Start()
     {
         
@@ -21,20 +22,12 @@ public class TouchToInteract : MonoBehaviour
             if (Input.touchCount == 1)
             {
                 GameObject g = GetTouchedShopOnSingleTouch();
-               
-                if (g)
-                {
-                    //TODO open shop menu
-                }
+                OpenShopMenu(g, true);
             }
             else
             {
                 GameObject g = GetTouchedShopOnMultipleTouchs();
-                
-                if (g)
-                {
-                    //open shop menu
-                }
+                OpenShopMenu(g, true);
             }
         }
     }
@@ -80,5 +73,29 @@ public class TouchToInteract : MonoBehaviour
             }
         }
         return null;
+    }
+
+    void OpenShopMenu(GameObject shop ,bool isOpening)
+    {
+        if (shop)
+        {
+            Shop comp = shop.GetComponent<Shop>();
+
+            if (comp)
+            {
+                ClosePreviousShopMenu();
+
+                comp.OpenShopMenu(isOpening);
+                _previousOpenedShop = comp;
+            }
+        }
+    }
+
+    void ClosePreviousShopMenu()
+    {
+        if (_previousOpenedShop)
+        {
+            _previousOpenedShop.OpenShopMenu(false);
+        }
     }
 }
