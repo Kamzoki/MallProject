@@ -10,7 +10,7 @@ public class PlayerManager : MonoBehaviour
 
     private float _spending = 0;
 
-    private List<Item> _CartItems;
+    private List<GameObject> _CartItems = new List<GameObject>();
 
     [SerializeField]
     private GameObject _EndCanvas;
@@ -31,18 +31,18 @@ public class PlayerManager : MonoBehaviour
             Debug.LogWarning("PlayerManager: End canvas reference is missing");
         }
     }
-    public void AddToCart(Item item)
+    public void AddToCart(GameObject item)
     {
         _playerState = State.Buying;
         _CartItems.Add(item);
-        _spending += item.m_Price;
+        _spending += item.GetComponent<Item>().m_Price;
     }
 
-    public void RemoveFromCart(Item item)
+    public void RemoveFromCart(GameObject item)
     {
         _playerState = State.Buying;
         _CartItems.Remove(item);
-        _spending -= item.m_Price;
+        _spending -= item.GetComponent<Item>().m_Price;
     }
 
     public void CheckOut()

@@ -9,7 +9,7 @@ public class Shop : MonoBehaviour
     private GameObject _menuUI; //defining the prefab of the menu
 
     [SerializeField]
-    private List<Sprite> _itemsImages; //a set of images of each item
+    private List<itemSpecifier> _itemsImages; //a set of images of each item
 
     [SerializeField]
     private float itemsPaddingHorizontal; 
@@ -58,8 +58,10 @@ public class Shop : MonoBehaviour
 
                 for (int i = 0; i < _itemsImages.Count; i++)
                 {
-                    _ItemPrefab.GetComponent<Item>().SetItemImage(_itemsImages[i]);
-                    
+                    _ItemPrefab.GetComponent<Item>().SetItemImage(_itemsImages[i].itemSprite);
+                    _ItemPrefab.GetComponent<Item>().m_Price = _itemsImages[i].itemPrice;
+                    _ItemPrefab.GetComponent<Item>().SetUIPrices();
+
                     if (currentRowIndex > 4)
                     {
                         currentRowIndex = 0;
@@ -99,3 +101,8 @@ public class Shop : MonoBehaviour
     }
 }
 
+[System.Serializable]
+public struct itemSpecifier{
+    public Sprite itemSprite;
+    public float itemPrice;
+}
