@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -18,6 +18,10 @@ public class PlayerManager : MonoBehaviour
     enum State { Buying, CheckingOutFailed}
     State _playerState = State.Buying;
 
+    [SerializeField]
+    Text _budgetUI;
+    [SerializeField]
+    Text _spendingUI;
 
     private void Start()
     {
@@ -30,12 +34,25 @@ public class PlayerManager : MonoBehaviour
         {
             Debug.LogWarning("PlayerManager: End canvas reference is missing");
         }
+
+        if (_budgetUI && _spendingUI)
+        {
+            _budgetUI.text = _maxBudget.ToString();
+            _spendingUI.text = _spending.ToString();
+        }
+        else
+        {
+            Debug.LogWarning("Missing budget and spending text element reference");
+        }
     }
+
+
     public void AddToCart(GameObject item)
     {
         _playerState = State.Buying;
         _CartItems.Add(item);
         _spending += item.GetComponent<Item>().m_Price;
+        _spendingUI.text = _spending.ToString();
     }
 
     public void RemoveFromCart(GameObject item)
@@ -43,6 +60,7 @@ public class PlayerManager : MonoBehaviour
         _playerState = State.Buying;
         _CartItems.Remove(item);
         _spending -= item.GetComponent<Item>().m_Price;
+        _spendingUI.text = _spending.ToString();
     }
 
     public void CheckOut()
