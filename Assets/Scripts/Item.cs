@@ -5,6 +5,15 @@ using UnityEngine.UI;
 
 public class Item : MonoBehaviour
 {
-    public float price = 0;
-    public Image itemIcon;
+    public float m_Price = 0;
+
+    public void SetItemImage(Sprite img)
+    {
+        var imgComp = GetComponent<Image>();
+
+        if (imgComp)
+        {
+            imgComp.sprite = img;
+        }
+    }
 }

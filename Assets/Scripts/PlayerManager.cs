@@ -35,14 +35,14 @@ public class PlayerManager : MonoBehaviour
     {
         _playerState = State.Buying;
         _CartItems.Add(item);
-        _spending += item.price;
+        _spending += item.m_Price;
     }
 
     public void RemoveFromCart(Item item)
     {
         _playerState = State.Buying;
         _CartItems.Remove(item);
-        _spending -= item.price;
+        _spending -= item.m_Price;
     }
 
     public void CheckOut()
