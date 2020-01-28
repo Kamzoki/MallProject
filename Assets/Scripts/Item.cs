@@ -10,6 +10,11 @@ public class Item : MonoBehaviour
     [SerializeField]
     private Text priceText;
 
+    [SerializeField]
+    private GameObject ReturnButton;
+    [SerializeField]
+    private GameObject AddToCartButton;
+
     public void SetUIPrices()
     {
         //Called in Shop.cs when item initialization is complete inside InitializeMenu
@@ -32,5 +37,20 @@ public class Item : MonoBehaviour
     public void AddToCart()
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().AddToCart(gameObject);
+    }
+
+    public void RemoveFromCart()
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().RemoveFromCart(gameObject);
+        GameObject.Destroy(gameObject);
+    }
+
+    public void ShowReturnButton(bool isShowing)
+    {
+        if (ReturnButton && AddToCartButton)
+        {
+            ReturnButton.SetActive(isShowing); //False by default
+            AddToCartButton.SetActive(!isShowing); //True by default
+        }
     }
 }

@@ -12,6 +12,8 @@ public class PlayerManager : MonoBehaviour
 
     private List<GameObject> _CartItems = new List<GameObject>();
 
+    public List<GameObject> m_CartItems => _CartItems;
+
     [SerializeField]
     private GameObject _EndCanvas;
 
@@ -50,7 +52,9 @@ public class PlayerManager : MonoBehaviour
     public void AddToCart(GameObject item)
     {
         _playerState = State.Buying;
+        
         _CartItems.Add(item);
+
         _spending += item.GetComponent<Item>().m_Price;
         _spendingUI.text = _spending.ToString();
     }

@@ -61,6 +61,7 @@ public class Shop : MonoBehaviour
                     _ItemPrefab.GetComponent<Item>().SetItemImage(_itemsImages[i].itemSprite);
                     _ItemPrefab.GetComponent<Item>().m_Price = _itemsImages[i].itemPrice;
                     _ItemPrefab.GetComponent<Item>().SetUIPrices();
+                    _ItemPrefab.GetComponent<Item>().ShowReturnButton(false);
 
                     if (currentRowIndex > 4)
                     {
