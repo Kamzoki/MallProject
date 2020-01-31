@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
+    public PlayerCartHandler PCH;
+
     [SerializeField]
     private float _maxBudget = 50;
 
@@ -24,6 +26,9 @@ public class PlayerManager : MonoBehaviour
     Text _budgetUI;
     [SerializeField]
     Text _spendingUI;
+
+    [SerializeField]
+    GameObject _CheckoutForm;
 
     private void Start()
     {
@@ -67,27 +72,45 @@ public class PlayerManager : MonoBehaviour
         _spendingUI.text = _spending.ToString();
     }
 
+    public void CheckoutForm(bool isShowing)
+    {
+        if (_CheckoutForm)
+        {
+            _CheckoutForm.SetActive(isShowing);
+            if (isShowing)
+            {
+                Time.timeScale = 0;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
+        }
+    }
+
     public void CheckOut()
     {
-        if (_maxBudget >= _spending)
-        {
+        //if (_maxBudget >= _spending)
+        //{
             if (_EndCanvas)
             {
                 _EndCanvas.SetActive(true);
             }
-            
+            else
             {
                 Debug.LogWarning("End canvas reference missing");
             }
+
+            Debug.LogWarning("Checking out");
             _maxBudget -= _spending;
             _spending = 0;
             Time.timeScale = 0;
-        }
+        //}
 
-        else
-        {
-            _playerState = State.CheckingOutFailed;
-        }
+        //else
+        //{
+        //    _playerState = State.CheckingOutFailed;
+        //}
     }
 
     private void OnGUI()

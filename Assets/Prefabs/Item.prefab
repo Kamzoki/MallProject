@@ -196,7 +196,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ac8e1cdf02da09440b81a5dffd310906, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1c0a73042439b7e42b051c8a2469bc52, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3aa1cf19cf9451246ada5148e8c22471, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Price: 122
+  m_Price: 1340
   priceText: {fileID: 5560502061524062458}
   ReturnButton: {fileID: 786726588243572452}
   AddToCartButton: {fileID: 7486680388729486040}
@@ -298,7 +298,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 122 $
+  m_Text: 1340 $
 --- !u!1 &5076771619219413786
 GameObject:
   m_ObjectHideFlags: 0

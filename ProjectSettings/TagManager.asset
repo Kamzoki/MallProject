@@ -8,6 +8,9 @@ TagManager:
   - MoveJS
   - Shop
   - MainCanvas
+  - ScrollViewPort
+  - Scroller
+  - CheckOut
   layers:
   - Default
   - TransparentFX

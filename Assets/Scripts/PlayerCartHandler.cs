@@ -18,7 +18,9 @@ public class PlayerCartHandler : MonoBehaviour
     float itemsPaddingVerticel;
 
     GameObject newPlayerMenu;
-    bool isShowing = false;
+    
+    [HideInInspector]
+    public bool isShowing = false;
     void Start()
     {
         if (!_PlayerCartUI)
@@ -41,6 +43,11 @@ public class PlayerCartHandler : MonoBehaviour
             if (pm)
             {
                 newPlayerMenu = Instantiate(_PlayerCartUI, GameObject.FindGameObjectWithTag("MainCanvas").transform, false) as GameObject;
+
+                foreach (var item in newPlayerMenu.GetComponentsInChildren<UI>())
+                {
+                    item.isPlayerScroll = true;
+                }
 
                 Vector2 origin = new Vector2(0, 0);
                 Vector2 newPos = origin;
