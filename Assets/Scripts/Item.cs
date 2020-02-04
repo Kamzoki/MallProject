@@ -15,6 +15,12 @@ public class Item : MonoBehaviour
     [SerializeField]
     private GameObject AddToCartButton;
 
+    private AudioSource source;
+
+    private void Start()
+    {
+        source = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
+    }
     public void SetUIPrices()
     {
         //Called in Shop.cs when item initialization is complete inside InitializeMenu
@@ -37,7 +43,8 @@ public class Item : MonoBehaviour
     public void AddToCart()
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerManager>().AddToCart(gameObject);
-    }
+        source.Play();
+}
 
     public void RemoveFromCart()
     {
